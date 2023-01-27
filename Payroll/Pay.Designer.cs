@@ -30,12 +30,10 @@ namespace Payroll
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pay));
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.dgvPay = new System.Windows.Forms.DataGridView();
-            this.lblSal = new System.Windows.Forms.Label();
-            this.tbSal = new System.Windows.Forms.TextBox();
+            this.btnCalc = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.dgvPayDetail = new System.Windows.Forms.DataGridView();
             this.lblEmpID = new System.Windows.Forms.Label();
             this.cbEmpID = new System.Windows.Forms.ComboBox();
             this.lblName = new System.Windows.Forms.Label();
@@ -43,30 +41,43 @@ namespace Payroll
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btnPay = new System.Windows.Forms.PictureBox();
             this.btnTime = new System.Windows.Forms.PictureBox();
-            this.btnDetail = new System.Windows.Forms.PictureBox();
             this.btnBonus = new System.Windows.Forms.PictureBox();
             this.btnEmp = new System.Windows.Forms.PictureBox();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.lblTax = new System.Windows.Forms.Label();
+            this.tbTax = new System.Windows.Forms.TextBox();
+            this.lblBal = new System.Windows.Forms.Label();
+            this.tbBal = new System.Windows.Forms.TextBox();
+            this.tbBnsAmt = new System.Windows.Forms.TextBox();
+            this.lblBnsAmt = new System.Windows.Forms.Label();
+            this.lblVacUsed = new System.Windows.Forms.Label();
+            this.tbVacUsed = new System.Windows.Forms.TextBox();
+            this.lblHrsWorked = new System.Windows.Forms.Label();
+            this.tbHrsWorked = new System.Windows.Forms.TextBox();
+            this.cbBonus = new System.Windows.Forms.ComboBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.lblWage = new System.Windows.Forms.Label();
+            this.tbWage = new System.Windows.Forms.TextBox();
+            this.lblPeriod = new System.Windows.Forms.Label();
+            this.datePeriod = new System.Windows.Forms.DateTimePicker();
+            this.lblBnsName = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.navMarker = new System.Windows.Forms.Panel();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblBonus = new System.Windows.Forms.Label();
-            this.lblDetail = new System.Windows.Forms.Label();
             this.lblEmp = new System.Windows.Forms.Label();
             this.lblHome = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.ExitBox = new System.Windows.Forms.PictureBox();
             this.lblPay = new System.Windows.Forms.Label();
-            this.lblBns = new System.Windows.Forms.Label();
-            this.tbBns = new System.Windows.Forms.TextBox();
-            this.lblPeriod = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPay)).BeginInit();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.navIndicator = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBonus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEmp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -74,68 +85,56 @@ namespace Payroll
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExitBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnDelete
+            // btnCalc
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.Honeydew;
-            this.btnDelete.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
-            this.btnDelete.Location = new System.Drawing.Point(290, 316);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(122, 42);
-            this.btnDelete.TabIndex = 25;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnCalc.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnCalc.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
+            this.btnCalc.Location = new System.Drawing.Point(368, 316);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(135, 42);
+            this.btnCalc.TabIndex = 25;
+            this.btnCalc.Text = "Calculate";
+            this.btnCalc.UseVisualStyleBackColor = false;
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
-            // btnEdit
+            // btnUpdate
             // 
-            this.btnEdit.BackColor = System.Drawing.Color.Honeydew;
-            this.btnEdit.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
-            this.btnEdit.Location = new System.Drawing.Point(162, 316);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(122, 42);
-            this.btnEdit.TabIndex = 24;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnUpdate.BackColor = System.Drawing.Color.Honeydew;
+            this.btnUpdate.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.Location = new System.Drawing.Point(162, 316);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(122, 42);
+            this.btnUpdate.TabIndex = 24;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // btnSave
+            // btnSubmit
             // 
-            this.btnSave.BackColor = System.Drawing.Color.Honeydew;
-            this.btnSave.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
-            this.btnSave.Location = new System.Drawing.Point(34, 316);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(122, 42);
-            this.btnSave.TabIndex = 23;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSubmit.BackColor = System.Drawing.Color.Honeydew;
+            this.btnSubmit.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
+            this.btnSubmit.Location = new System.Drawing.Point(34, 316);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(122, 42);
+            this.btnSubmit.TabIndex = 23;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // dgvPay
+            // dgvPayDetail
             // 
-            this.dgvPay.BackgroundColor = System.Drawing.Color.Honeydew;
-            this.dgvPay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPay.Location = new System.Drawing.Point(34, 364);
-            this.dgvPay.Name = "dgvPay";
-            this.dgvPay.Size = new System.Drawing.Size(990, 290);
-            this.dgvPay.TabIndex = 22;
-            // 
-            // lblSal
-            // 
-            this.lblSal.AutoSize = true;
-            this.lblSal.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSal.Location = new System.Drawing.Point(562, 103);
-            this.lblSal.Name = "lblSal";
-            this.lblSal.Size = new System.Drawing.Size(146, 34);
-            this.lblSal.TabIndex = 21;
-            this.lblSal.Text = "Base Salary";
-            // 
-            // tbSal
-            // 
-            this.tbSal.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSal.Location = new System.Drawing.Point(568, 140);
-            this.tbSal.Name = "tbSal";
-            this.tbSal.Size = new System.Drawing.Size(213, 35);
-            this.tbSal.TabIndex = 20;
+            this.dgvPayDetail.BackgroundColor = System.Drawing.Color.Honeydew;
+            this.dgvPayDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPayDetail.Location = new System.Drawing.Point(34, 364);
+            this.dgvPayDetail.Name = "dgvPayDetail";
+            this.dgvPayDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPayDetail.Size = new System.Drawing.Size(990, 290);
+            this.dgvPayDetail.TabIndex = 22;
+            this.dgvPayDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPayDetail_CellContentClick);
+            this.dgvPayDetail.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPayDetail_CellContentDoubleClick);
             // 
             // lblEmpID
             // 
@@ -154,13 +153,14 @@ namespace Payroll
             this.cbEmpID.Location = new System.Drawing.Point(34, 140);
             this.cbEmpID.Name = "cbEmpID";
             this.cbEmpID.Size = new System.Drawing.Size(213, 35);
-            this.cbEmpID.TabIndex = 8;
+            this.cbEmpID.TabIndex = 0;
+            this.cbEmpID.SelectionChangeCommitted += new System.EventHandler(this.cbEmpID_SelectionChangeCommitted);
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(294, 103);
+            this.lblName.Location = new System.Drawing.Point(284, 103);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(84, 34);
             this.lblName.TabIndex = 7;
@@ -168,8 +168,9 @@ namespace Payroll
             // 
             // tbName
             // 
+            this.tbName.Enabled = false;
             this.tbName.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(300, 140);
+            this.tbName.Location = new System.Drawing.Point(290, 140);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(213, 35);
             this.tbName.TabIndex = 2;
@@ -177,7 +178,7 @@ namespace Payroll
             // btnPay
             // 
             this.btnPay.Image = ((System.Drawing.Image)(resources.GetObject("btnPay.Image")));
-            this.btnPay.Location = new System.Drawing.Point(12, 559);
+            this.btnPay.Location = new System.Drawing.Point(12, 485);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(68, 68);
             this.btnPay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -187,27 +188,17 @@ namespace Payroll
             // btnTime
             // 
             this.btnTime.Image = ((System.Drawing.Image)(resources.GetObject("btnTime.Image")));
-            this.btnTime.Location = new System.Drawing.Point(12, 485);
+            this.btnTime.Location = new System.Drawing.Point(12, 411);
             this.btnTime.Name = "btnTime";
             this.btnTime.Size = new System.Drawing.Size(68, 68);
             this.btnTime.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnTime.TabIndex = 20;
             this.btnTime.TabStop = false;
             // 
-            // btnDetail
-            // 
-            this.btnDetail.Image = ((System.Drawing.Image)(resources.GetObject("btnDetail.Image")));
-            this.btnDetail.Location = new System.Drawing.Point(12, 337);
-            this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(68, 68);
-            this.btnDetail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnDetail.TabIndex = 23;
-            this.btnDetail.TabStop = false;
-            // 
             // btnBonus
             // 
             this.btnBonus.Image = ((System.Drawing.Image)(resources.GetObject("btnBonus.Image")));
-            this.btnBonus.Location = new System.Drawing.Point(12, 411);
+            this.btnBonus.Location = new System.Drawing.Point(12, 337);
             this.btnBonus.Name = "btnBonus";
             this.btnBonus.Size = new System.Drawing.Size(68, 68);
             this.btnBonus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -247,16 +238,27 @@ namespace Payroll
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelMain.Controls.Add(this.lblTax);
+            this.panelMain.Controls.Add(this.tbTax);
+            this.panelMain.Controls.Add(this.lblBal);
+            this.panelMain.Controls.Add(this.tbBal);
+            this.panelMain.Controls.Add(this.tbBnsAmt);
+            this.panelMain.Controls.Add(this.lblBnsAmt);
+            this.panelMain.Controls.Add(this.lblVacUsed);
+            this.panelMain.Controls.Add(this.tbVacUsed);
+            this.panelMain.Controls.Add(this.lblHrsWorked);
+            this.panelMain.Controls.Add(this.tbHrsWorked);
+            this.panelMain.Controls.Add(this.cbBonus);
+            this.panelMain.Controls.Add(this.btnClear);
+            this.panelMain.Controls.Add(this.lblWage);
+            this.panelMain.Controls.Add(this.tbWage);
             this.panelMain.Controls.Add(this.lblPeriod);
-            this.panelMain.Controls.Add(this.dateTimePicker1);
-            this.panelMain.Controls.Add(this.lblBns);
-            this.panelMain.Controls.Add(this.tbBns);
-            this.panelMain.Controls.Add(this.btnDelete);
-            this.panelMain.Controls.Add(this.btnEdit);
-            this.panelMain.Controls.Add(this.btnSave);
-            this.panelMain.Controls.Add(this.dgvPay);
-            this.panelMain.Controls.Add(this.lblSal);
-            this.panelMain.Controls.Add(this.tbSal);
+            this.panelMain.Controls.Add(this.datePeriod);
+            this.panelMain.Controls.Add(this.lblBnsName);
+            this.panelMain.Controls.Add(this.btnCalc);
+            this.panelMain.Controls.Add(this.btnUpdate);
+            this.panelMain.Controls.Add(this.btnSubmit);
+            this.panelMain.Controls.Add(this.dgvPayDetail);
             this.panelMain.Controls.Add(this.lblEmpID);
             this.panelMain.Controls.Add(this.cbEmpID);
             this.panelMain.Controls.Add(this.lblName);
@@ -266,6 +268,178 @@ namespace Payroll
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1131, 693);
             this.panelMain.TabIndex = 15;
+            // 
+            // lblTax
+            // 
+            this.lblTax.AutoSize = true;
+            this.lblTax.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTax.Location = new System.Drawing.Point(759, 286);
+            this.lblTax.Name = "lblTax";
+            this.lblTax.Size = new System.Drawing.Size(113, 34);
+            this.lblTax.TabIndex = 53;
+            this.lblTax.Text = "Tax (6%)";
+            // 
+            // tbTax
+            // 
+            this.tbTax.Enabled = false;
+            this.tbTax.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTax.Location = new System.Drawing.Point(765, 323);
+            this.tbTax.Name = "tbTax";
+            this.tbTax.Size = new System.Drawing.Size(105, 35);
+            this.tbTax.TabIndex = 52;
+            // 
+            // lblBal
+            // 
+            this.lblBal.AutoSize = true;
+            this.lblBal.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBal.Location = new System.Drawing.Point(540, 285);
+            this.lblBal.Name = "lblBal";
+            this.lblBal.Size = new System.Drawing.Size(104, 34);
+            this.lblBal.TabIndex = 51;
+            this.lblBal.Text = "Balance";
+            // 
+            // tbBal
+            // 
+            this.tbBal.BackColor = System.Drawing.Color.LemonChiffon;
+            this.tbBal.Enabled = false;
+            this.tbBal.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBal.Location = new System.Drawing.Point(546, 322);
+            this.tbBal.Name = "tbBal";
+            this.tbBal.Size = new System.Drawing.Size(213, 35);
+            this.tbBal.TabIndex = 50;
+            // 
+            // tbBnsAmt
+            // 
+            this.tbBnsAmt.Enabled = false;
+            this.tbBnsAmt.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBnsAmt.Location = new System.Drawing.Point(811, 234);
+            this.tbBnsAmt.Name = "tbBnsAmt";
+            this.tbBnsAmt.Size = new System.Drawing.Size(213, 35);
+            this.tbBnsAmt.TabIndex = 49;
+            // 
+            // lblBnsAmt
+            // 
+            this.lblBnsAmt.AutoSize = true;
+            this.lblBnsAmt.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBnsAmt.Location = new System.Drawing.Point(805, 197);
+            this.lblBnsAmt.Name = "lblBnsAmt";
+            this.lblBnsAmt.Size = new System.Drawing.Size(185, 34);
+            this.lblBnsAmt.TabIndex = 48;
+            this.lblBnsAmt.Text = "Bonus Amount";
+            // 
+            // lblVacUsed
+            // 
+            this.lblVacUsed.AutoSize = true;
+            this.lblVacUsed.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVacUsed.Location = new System.Drawing.Point(540, 197);
+            this.lblVacUsed.Name = "lblVacUsed";
+            this.lblVacUsed.Size = new System.Drawing.Size(201, 34);
+            this.lblVacUsed.TabIndex = 47;
+            this.lblVacUsed.Text = "Vacations Hours";
+            // 
+            // tbVacUsed
+            // 
+            this.tbVacUsed.Enabled = false;
+            this.tbVacUsed.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbVacUsed.Location = new System.Drawing.Point(546, 234);
+            this.tbVacUsed.Name = "tbVacUsed";
+            this.tbVacUsed.Size = new System.Drawing.Size(213, 35);
+            this.tbVacUsed.TabIndex = 46;
+            // 
+            // lblHrsWorked
+            // 
+            this.lblHrsWorked.AutoSize = true;
+            this.lblHrsWorked.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHrsWorked.Location = new System.Drawing.Point(284, 197);
+            this.lblHrsWorked.Name = "lblHrsWorked";
+            this.lblHrsWorked.Size = new System.Drawing.Size(184, 34);
+            this.lblHrsWorked.TabIndex = 45;
+            this.lblHrsWorked.Text = "Hours Worked";
+            // 
+            // tbHrsWorked
+            // 
+            this.tbHrsWorked.Enabled = false;
+            this.tbHrsWorked.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbHrsWorked.Location = new System.Drawing.Point(290, 234);
+            this.tbHrsWorked.Name = "tbHrsWorked";
+            this.tbHrsWorked.Size = new System.Drawing.Size(213, 35);
+            this.tbHrsWorked.TabIndex = 44;
+            // 
+            // cbBonus
+            // 
+            this.cbBonus.Font = new System.Drawing.Font("Gill Sans MT", 14F, System.Drawing.FontStyle.Bold);
+            this.cbBonus.FormattingEnabled = true;
+            this.cbBonus.Location = new System.Drawing.Point(811, 140);
+            this.cbBonus.Name = "cbBonus";
+            this.cbBonus.Size = new System.Drawing.Size(213, 35);
+            this.cbBonus.TabIndex = 33;
+            this.cbBonus.SelectionChangeCommitted += new System.EventHandler(this.cbBonus_SelectionChangeCommitted);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.White;
+            this.btnClear.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold);
+            this.btnClear.Location = new System.Drawing.Point(902, 316);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(122, 42);
+            this.btnClear.TabIndex = 32;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // lblWage
+            // 
+            this.lblWage.AutoSize = true;
+            this.lblWage.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWage.Location = new System.Drawing.Point(28, 197);
+            this.lblWage.Name = "lblWage";
+            this.lblWage.Size = new System.Drawing.Size(120, 34);
+            this.lblWage.TabIndex = 31;
+            this.lblWage.Text = "Wage/Hr";
+            // 
+            // tbWage
+            // 
+            this.tbWage.Enabled = false;
+            this.tbWage.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbWage.Location = new System.Drawing.Point(34, 234);
+            this.tbWage.Name = "tbWage";
+            this.tbWage.Size = new System.Drawing.Size(213, 35);
+            this.tbWage.TabIndex = 30;
+            // 
+            // lblPeriod
+            // 
+            this.lblPeriod.AutoSize = true;
+            this.lblPeriod.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPeriod.Location = new System.Drawing.Point(540, 103);
+            this.lblPeriod.Name = "lblPeriod";
+            this.lblPeriod.Size = new System.Drawing.Size(90, 34);
+            this.lblPeriod.TabIndex = 29;
+            this.lblPeriod.Text = "Period";
+            // 
+            // datePeriod
+            // 
+            this.datePeriod.CalendarFont = new System.Drawing.Font("Gill Sans MT", 14F, System.Drawing.FontStyle.Bold);
+            this.datePeriod.CalendarMonthBackground = System.Drawing.Color.Honeydew;
+            this.datePeriod.CalendarTitleBackColor = System.Drawing.Color.Honeydew;
+            this.datePeriod.CustomFormat = "MMM/yyyy";
+            this.datePeriod.Font = new System.Drawing.Font("Gill Sans MT", 14F, System.Drawing.FontStyle.Bold);
+            this.datePeriod.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datePeriod.Location = new System.Drawing.Point(546, 140);
+            this.datePeriod.MinimumSize = new System.Drawing.Size(4, 35);
+            this.datePeriod.Name = "datePeriod";
+            this.datePeriod.Size = new System.Drawing.Size(213, 35);
+            this.datePeriod.TabIndex = 28;
+            this.datePeriod.Value = new System.DateTime(2023, 1, 21, 0, 0, 0, 0);
+            // 
+            // lblBnsName
+            // 
+            this.lblBnsName.AutoSize = true;
+            this.lblBnsName.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBnsName.Location = new System.Drawing.Point(805, 103);
+            this.lblBnsName.Name = "lblBnsName";
+            this.lblBnsName.Size = new System.Drawing.Size(160, 34);
+            this.lblBnsName.TabIndex = 27;
+            this.lblBnsName.Text = "Bonus Name";
             // 
             // pictureBox2
             // 
@@ -278,40 +452,32 @@ namespace Payroll
             // navMarker
             // 
             this.navMarker.BackColor = System.Drawing.Color.Black;
-            this.navMarker.Location = new System.Drawing.Point(960, 58);
+            this.navMarker.Location = new System.Drawing.Point(786, 62);
             this.navMarker.Name = "navMarker";
-            this.navMarker.Size = new System.Drawing.Size(54, 10);
+            this.navMarker.Size = new System.Drawing.Size(54, 6);
             this.navMarker.TabIndex = 4;
             // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Poplar Std", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(788, 11);
+            this.lblTime.Location = new System.Drawing.Point(614, 11);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(92, 51);
             this.lblTime.TabIndex = 2;
             this.lblTime.Text = "Time";
+            this.lblTime.Click += new System.EventHandler(this.lblTime_Click);
             // 
             // lblBonus
             // 
             this.lblBonus.AutoSize = true;
             this.lblBonus.Font = new System.Drawing.Font("Poplar Std", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBonus.Location = new System.Drawing.Point(588, 11);
+            this.lblBonus.Location = new System.Drawing.Point(414, 11);
             this.lblBonus.Name = "lblBonus";
             this.lblBonus.Size = new System.Drawing.Size(134, 51);
             this.lblBonus.TabIndex = 2;
             this.lblBonus.Text = "Bonuses";
-            // 
-            // lblDetail
-            // 
-            this.lblDetail.AutoSize = true;
-            this.lblDetail.Font = new System.Drawing.Font("Poplar Std", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetail.Location = new System.Drawing.Point(409, 11);
-            this.lblDetail.Name = "lblDetail";
-            this.lblDetail.Size = new System.Drawing.Size(105, 51);
-            this.lblDetail.TabIndex = 2;
-            this.lblDetail.Text = "Detail";
+            this.lblBonus.Click += new System.EventHandler(this.lblBonus_Click);
             // 
             // lblEmp
             // 
@@ -322,6 +488,7 @@ namespace Payroll
             this.lblEmp.Size = new System.Drawing.Size(166, 51);
             this.lblEmp.TabIndex = 1;
             this.lblEmp.Text = "Employees";
+            this.lblEmp.Click += new System.EventHandler(this.lblEmp_Click);
             // 
             // lblHome
             // 
@@ -332,16 +499,16 @@ namespace Payroll
             this.lblHome.Size = new System.Drawing.Size(97, 51);
             this.lblHome.TabIndex = 0;
             this.lblHome.Text = "Home";
+            this.lblHome.Click += new System.EventHandler(this.lblHome_Click);
             // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.Honeydew;
+            this.panelTop.Controls.Add(this.ExitBox);
             this.panelTop.Controls.Add(this.navMarker);
-            this.panelTop.Controls.Add(this.pictureBox3);
             this.panelTop.Controls.Add(this.lblPay);
             this.panelTop.Controls.Add(this.lblTime);
             this.panelTop.Controls.Add(this.lblBonus);
-            this.panelTop.Controls.Add(this.lblDetail);
             this.panelTop.Controls.Add(this.lblEmp);
             this.panelTop.Controls.Add(this.lblHome);
             this.panelTop.Location = new System.Drawing.Point(86, 12);
@@ -349,66 +516,49 @@ namespace Payroll
             this.panelTop.Size = new System.Drawing.Size(1131, 68);
             this.panelTop.TabIndex = 17;
             // 
-            // pictureBox3
+            // ExitBox
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1079, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(42, 42);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
+            this.ExitBox.Image = ((System.Drawing.Image)(resources.GetObject("ExitBox.Image")));
+            this.ExitBox.Location = new System.Drawing.Point(1079, 12);
+            this.ExitBox.Name = "ExitBox";
+            this.ExitBox.Size = new System.Drawing.Size(42, 42);
+            this.ExitBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ExitBox.TabIndex = 5;
+            this.ExitBox.TabStop = false;
+            this.ExitBox.Click += new System.EventHandler(this.ExitBox_Click);
             // 
             // lblPay
             // 
             this.lblPay.AutoSize = true;
             this.lblPay.Font = new System.Drawing.Font("Poplar Std", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPay.Location = new System.Drawing.Point(951, 11);
+            this.lblPay.Location = new System.Drawing.Point(777, 11);
             this.lblPay.Name = "lblPay";
             this.lblPay.Size = new System.Drawing.Size(73, 51);
             this.lblPay.TabIndex = 2;
             this.lblPay.Text = "Pay";
             // 
-            // lblBns
+            // printPreviewDialog1
             // 
-            this.lblBns.AutoSize = true;
-            this.lblBns.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBns.Location = new System.Drawing.Point(28, 197);
-            this.lblBns.Name = "lblBns";
-            this.lblBns.Size = new System.Drawing.Size(84, 34);
-            this.lblBns.TabIndex = 27;
-            this.lblBns.Text = "Bonus";
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
-            // tbBns
+            // printDocument1
             // 
-            this.tbBns.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBns.Location = new System.Drawing.Point(34, 234);
-            this.tbBns.Name = "tbBns";
-            this.tbBns.Size = new System.Drawing.Size(213, 35);
-            this.tbBns.TabIndex = 26;
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // lblPeriod
+            // navIndicator
             // 
-            this.lblPeriod.AutoSize = true;
-            this.lblPeriod.Font = new System.Drawing.Font("Gill Sans MT", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriod.Location = new System.Drawing.Point(294, 197);
-            this.lblPeriod.Name = "lblPeriod";
-            this.lblPeriod.Size = new System.Drawing.Size(90, 34);
-            this.lblPeriod.TabIndex = 29;
-            this.lblPeriod.Text = "Period";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Gill Sans MT", 14F, System.Drawing.FontStyle.Bold);
-            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.Honeydew;
-            this.dateTimePicker1.CalendarTitleBackColor = System.Drawing.Color.Honeydew;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Gill Sans MT", 14F, System.Drawing.FontStyle.Bold);
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(300, 234);
-            this.dateTimePicker1.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(213, 35);
-            this.dateTimePicker1.TabIndex = 28;
+            this.navIndicator.BackColor = System.Drawing.Color.Maroon;
+            this.navIndicator.Location = new System.Drawing.Point(10, 483);
+            this.navIndicator.Name = "navIndicator";
+            this.navIndicator.Size = new System.Drawing.Size(72, 72);
+            this.navIndicator.TabIndex = 54;
             // 
             // Pay
             // 
@@ -418,20 +568,19 @@ namespace Payroll
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.btnTime);
-            this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.btnBonus);
             this.Controls.Add(this.btnEmp);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.navIndicator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Pay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pay";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBonus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEmp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
@@ -441,19 +590,17 @@ namespace Payroll
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExitBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridView dgvPay;
-        private System.Windows.Forms.Label lblSal;
-        private System.Windows.Forms.TextBox tbSal;
+        private System.Windows.Forms.Button btnCalc;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.DataGridView dgvPayDetail;
         private System.Windows.Forms.Label lblEmpID;
         private System.Windows.Forms.ComboBox cbEmpID;
         private System.Windows.Forms.Label lblName;
@@ -461,7 +608,6 @@ namespace Payroll
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.PictureBox btnPay;
         private System.Windows.Forms.PictureBox btnTime;
-        private System.Windows.Forms.PictureBox btnDetail;
         private System.Windows.Forms.PictureBox btnBonus;
         private System.Windows.Forms.PictureBox btnEmp;
         private System.Windows.Forms.PictureBox btnHome;
@@ -471,15 +617,30 @@ namespace Payroll
         private System.Windows.Forms.Panel navMarker;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblBonus;
-        private System.Windows.Forms.Label lblDetail;
         private System.Windows.Forms.Label lblEmp;
         private System.Windows.Forms.Label lblHome;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox ExitBox;
         private System.Windows.Forms.Label lblPay;
-        private System.Windows.Forms.Label lblBns;
-        private System.Windows.Forms.TextBox tbBns;
+        private System.Windows.Forms.Label lblBnsName;
         private System.Windows.Forms.Label lblPeriod;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker datePeriod;
+        private System.Windows.Forms.Label lblWage;
+        private System.Windows.Forms.TextBox tbWage;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ComboBox cbBonus;
+        private System.Windows.Forms.Label lblVacUsed;
+        private System.Windows.Forms.TextBox tbVacUsed;
+        private System.Windows.Forms.Label lblHrsWorked;
+        private System.Windows.Forms.TextBox tbHrsWorked;
+        private System.Windows.Forms.Label lblBnsAmt;
+        private System.Windows.Forms.TextBox tbBnsAmt;
+        private System.Windows.Forms.Label lblBal;
+        private System.Windows.Forms.TextBox tbBal;
+        private System.Windows.Forms.Label lblTax;
+        private System.Windows.Forms.TextBox tbTax;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.Panel navIndicator;
     }
 }

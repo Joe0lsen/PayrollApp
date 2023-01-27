@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Payroll;
 
 namespace Payroll
 {
@@ -17,24 +18,38 @@ namespace Payroll
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void ExitBox_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+        }
+
+        private void lblEmp_Click(object sender, EventArgs e)
+        {
+            Employees Obj = new Employees();
+            Obj.Show();
+            this.Hide();
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void lblBonus_Click(object sender, EventArgs e)
         {
-
+            Bonus Obj = new Bonus();
+            Obj.Show();
+            this.Hide();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void lblTime_Click(object sender, EventArgs e)
         {
-
+            Time Obj = new Time();
+            Obj.Show();
+            this.Hide();
         }
 
-        private void Home_Load(object sender, EventArgs e)
+        private void lblPay_Click(object sender, EventArgs e)
         {
-
+            Pay Obj = new Pay();
+            Obj.Show();
+            this.Hide();
         }
     }
 }

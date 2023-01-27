@@ -16,7 +16,9 @@ namespace Payroll
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Detail());
+            Application.Run(new Home());
+
+
         }
     }
 }
